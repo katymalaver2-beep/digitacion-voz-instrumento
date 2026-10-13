@@ -9,10 +9,11 @@
 :root{
   --bg:#f4f7fb;--card:#fff;--ink:#172033;--muted:#667085;--line:#d9e1ec;
   --accent:#315a85;--accent2:#24496f;--soft:#eaf1f8;--ok:#176b3a;--danger:#b42318;
+  --preview:#8a94a6;
 }
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:Arial,Helvetica,sans-serif}
-.wrap{width:min(980px,calc(100% - 24px));margin:18px auto 36px}
+.wrap{width:min(1040px,calc(100% - 24px));margin:18px auto 36px}
 header{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:14px}
 h1{font-size:24px;line-height:1.2;margin:0 0 5px}.sub{color:var(--muted);font-size:13px}
 .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:0 6px 20px rgba(16,24,40,.05);margin-bottom:14px}
@@ -24,38 +25,59 @@ button{border:0;border-radius:10px;padding:11px 15px;font-size:14px;font-weight:
 .primary{background:var(--accent);color:#fff}.primary:hover{background:var(--accent2)}
 .secondary{background:#eef2f6;color:var(--ink)} .good{background:var(--ok);color:#fff}
 .danger{background:#fff0ef;color:var(--danger)} button:disabled{opacity:.5;cursor:not-allowed}
-.info{display:grid;grid-template-columns:1.2fr 1.6fr .7fr;gap:10px}
+.info{display:grid;grid-template-columns:1.15fr 1.6fr .65fr;gap:10px}
 .box{background:#f8fafc;border:1px solid var(--line);border-radius:12px;padding:11px}
 .k{font-size:11px;text-transform:uppercase;color:var(--muted);font-weight:800;letter-spacing:.04em;margin-bottom:5px}
 .v{font-size:15px;font-weight:700;line-height:1.25}
-.current{text-align:center;padding:24px 10px 12px}
-.itemTitle{font-size:22px;color:var(--muted);font-weight:800}
-.big{font-size:78px;line-height:1.05;font-weight:900;color:var(--accent);min-height:88px}
+
+.dimension-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:18px 0 10px;
+}
+.item-card{
+  border:2px solid var(--line);border-radius:16px;padding:14px;text-align:center;background:#fbfcfe;
+  min-height:150px;transition:.15s;
+}
+.item-card.active{border-color:var(--accent);background:var(--soft)}
+.item-card.filled{border-color:#9fc2df;background:#f7fbff}
+.item-card.preview{border-style:dashed;border-color:#aeb8c7}
+.item-label{font-size:17px;color:var(--muted);font-weight:800}
+.value-box{
+  margin:12px auto 0;width:86px;height:78px;border:2px solid var(--line);border-radius:12px;
+  display:flex;align-items:center;justify-content:center;font-size:52px;font-weight:900;color:var(--accent);background:#fff;
+}
+.value-box.preview{color:var(--preview);border-style:dashed}
 .controls{display:flex;gap:9px;flex-wrap:wrap;justify-content:center}.mic-on{background:var(--danger)!important}
 .nums{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:14px}
-.num{background:#f3f6fa;border:1px solid var(--line);font-size:24px;padding:14px 4px}
+.num{background:#f3f6fa;border:1px solid var(--line);font-size:22px;padding:12px 4px}
 .transcript{margin-top:13px;border:1px dashed var(--line);border-radius:10px;padding:10px 12px;color:var(--muted);min-height:42px;font-size:14px}
 .progressOuter{height:10px;background:#e7edf4;border-radius:999px;overflow:hidden;margin-top:14px}
-.progressInner{height:100%;width:0;background:var(--accent);transition:width .2s}
+.progressInner{height:100%;width:0;background:var(--accent);transition:width .15s}
 .progressText{text-align:center;color:var(--muted);font-size:13px;margin-top:7px}
 .notice{display:none;margin-top:12px;border-radius:10px;padding:10px 12px;font-size:14px}
 .notice.ok{display:block;background:#ecfdf3;border:1px solid #abefc6;color:var(--ok)}
 .notice.err{display:block;background:#fef3f2;border:1px solid #fecdca;color:var(--danger)}
-.chips{display:flex;flex-wrap:wrap;gap:6px;max-height:150px;overflow:auto}
+
+.last-box{margin-top:12px;padding:10px 12px;border-radius:10px;background:#f8fafc;border:1px solid var(--line);display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.last-title{color:var(--muted);font-size:12px;font-weight:800;text-transform:uppercase}
+.last-values{font-size:18px;font-weight:900;color:var(--accent)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;max-height:160px;overflow:auto}
 .chip{background:var(--soft);color:var(--accent);border-radius:999px;padding:6px 9px;font-size:12px;font-weight:800}
 .small{font-size:12px;color:var(--muted);line-height:1.5}
 table{border-collapse:collapse;width:100%;font-size:13px}
 th,td{border-bottom:1px solid var(--line);padding:8px 7px;text-align:left;white-space:nowrap}
-th{background:#f8fafc;position:sticky;top:0}.history{max-height:240px;overflow:auto}
-@media(max-width:760px){.info{grid-template-columns:1fr}.row{grid-template-columns:1fr}header{flex-direction:column}}
+th{background:#f8fafc;position:sticky;top:0}.history{max-height:230px;overflow:auto}
+@media(max-width:760px){
+  .info{grid-template-columns:1fr}.row{grid-template-columns:1fr}header{flex-direction:column}
+  .dimension-grid{grid-template-columns:1fr}
+}
 </style>
 </head>
 <body>
 <div class="wrap">
 <header>
   <div>
-    <h1>Digitación por voz · continua</h1>
-    <div class="sub">Dices los valores uno tras otro y la herramienta avanza sola hasta completar los 42 ítems.</div>
+    <h1>Digitación por voz · por dimensión</h1>
+    <div class="sub">Dicta tres valores seguidos. Los ves llenarse en pantalla y al completar la dimensión pasa automáticamente a la siguiente.</div>
   </div>
   <div class="sub">Participantes guardados: <strong id="count">0</strong></div>
 </header>
@@ -77,17 +99,28 @@ th{background:#f8fafc;position:sticky;top:0}.history{max-height:240px;overflow:a
   <div class="info">
     <div class="box"><div class="k">Variable</div><div class="v" id="varTxt"></div></div>
     <div class="box"><div class="k">Dimensión</div><div class="v" id="dimTxt"></div></div>
-    <div class="box"><div class="k">Posición</div><div class="v" id="posTxt"></div></div>
+    <div class="box"><div class="k">Dimensión</div><div class="v" id="dimPosTxt"></div></div>
   </div>
 
-  <div class="current">
-    <div class="itemTitle" id="itemTxt">Ítem 1</div>
-    <div class="big" id="valorTxt">—</div>
+  <div class="dimension-grid">
+    <div class="item-card active" id="card0">
+      <div class="item-label" id="item0">Ítem 1</div>
+      <div class="value-box" id="val0">—</div>
+    </div>
+    <div class="item-card" id="card1">
+      <div class="item-label" id="item1">Ítem 2</div>
+      <div class="value-box" id="val1">—</div>
+    </div>
+    <div class="item-card" id="card2">
+      <div class="item-label" id="item2">Ítem 3</div>
+      <div class="value-box" id="val2">—</div>
+    </div>
   </div>
 
   <div class="controls">
     <button id="micBtn" class="primary" onclick="toggleMic()">🎤 Iniciar dictado</button>
-    <button class="secondary" onclick="retroceder()">↶ Atrás</button>
+    <button class="secondary" onclick="retrocederUno()">↶ Atrás un ítem</button>
+    <button class="secondary" onclick="retrocederDimension()">↶ Dimensión anterior</button>
     <button class="danger" onclick="limpiarActual()">Borrar participante actual</button>
   </div>
 
@@ -100,7 +133,13 @@ th{background:#f8fafc;position:sticky;top:0}.history{max-height:240px;overflow:a
   </div>
 
   <div id="transcript" class="transcript">
-    Puedes decir: “cinco, cuatro, dos, tres…” sin detenerte. Cada número llena el siguiente ítem.
+    Ejemplo: “dos, tres, cuatro”. Los valores provisionales aparecen inmediatamente en gris; al confirmarlos el navegador quedan registrados.
+  </div>
+
+  <div id="lastBox" class="last-box" style="display:none">
+    <span class="last-title">Última dimensión completada</span>
+    <span id="lastDim" class="small"></span>
+    <span id="lastVals" class="last-values"></span>
   </div>
 
   <div class="progressOuter"><div id="bar" class="progressInner"></div></div>
@@ -109,15 +148,15 @@ th{background:#f8fafc;position:sticky;top:0}.history{max-height:240px;overflow:a
 </div>
 
 <div class="card">
-  <label>Valores registrados del participante actual</label>
+  <label>Resumen del participante actual</label>
   <div id="chips" class="chips"></div>
 </div>
 
 <div class="card small">
-  <strong>Modo de uso:</strong> escribe el código, pulsa una sola vez <strong>Iniciar dictado</strong> y empieza a leer
-  los números del cuestionario físico: “5, 4, 3, 2, 1…”. La herramienta acepta únicamente valores del 1 al 5,
-  los coloca uno por uno y avanza automáticamente por las 42 preguntas. Al llegar al ítem 42, guarda el participante
-  automáticamente y queda lista para el siguiente código.
+  <strong>Para mayor fluidez:</strong> pulsa el micrófono una sola vez y dicta cada dimensión como una frase corta:
+  “2, 3, 4” · “5, 5, 3” · “1, 2, 4”… No es necesario pulsar nada entre dimensiones.
+  La pantalla cambia sola cuando se confirman los tres valores. La vista previa en gris usa el reconocimiento provisional
+  del navegador para que puedas ver casi inmediatamente qué está entendiendo.
 </div>
 
 <div class="card">
@@ -135,27 +174,28 @@ th{background:#f8fafc;position:sticky;top:0}.history{max-height:240px;overflow:a
 </div>
 
 <script>
-const STORE='instrumento_voz_continua_v1';
+const STORE='instrumento_voz_dimensiones_v2';
 let valores=[];
 let recognition=null;
 let mic=false;
 let guardando=false;
+let preview=[];
 
 const dims=[
- {s:0,e:2,v:'V1: Inteligencia artificial',d:'D1-V1: Percepción inteligente',base:1},
- {s:3,e:5,v:'V1: Inteligencia artificial',d:'D2-V1: Aprendizaje automatizado',base:4},
- {s:6,e:8,v:'V1: Inteligencia artificial',d:'D3-V1: Razonamiento lógico',base:7},
- {s:9,e:11,v:'V1: Inteligencia artificial',d:'D4-V1: Resolución de problemas',base:10},
- {s:12,e:14,v:'V1: Inteligencia artificial',d:'D5-V1: Interacción lingüística',base:13},
- {s:15,e:17,v:'V1: Inteligencia artificial',d:'D6-V1: Trabajo creativo',base:16},
- {s:18,e:20,v:'V2: Personalización del aprendizaje',d:'D1-V2: Perfil del estudiante',base:1},
- {s:21,e:23,v:'V2: Personalización del aprendizaje',d:'D2-V2: Datos de entrada',base:4},
- {s:24,e:26,v:'V2: Personalización del aprendizaje',d:'D3-V2: Modelo de contenidos',base:7},
- {s:27,e:29,v:'V2: Personalización del aprendizaje',d:'D4-V2: Modelo instruccional',base:10},
- {s:30,e:32,v:'V2: Personalización del aprendizaje',d:'D5-V2: Motor adaptativo',base:13},
- {s:33,e:35,v:'V2: Personalización del aprendizaje',d:'D6-V2: Interfaz y controles de usuario',base:16},
- {s:36,e:38,v:'V2: Personalización del aprendizaje',d:'D7-V2: Objetivos de personalización',base:19},
- {s:39,e:41,v:'V2: Personalización del aprendizaje',d:'D8-V2: Evaluación y gobernanza',base:22}
+ {s:0,e:2,v:'V1: Inteligencia artificial',d:'D1-V1: Percepción inteligente',items:[1,2,3]},
+ {s:3,e:5,v:'V1: Inteligencia artificial',d:'D2-V1: Aprendizaje automatizado',items:[4,5,6]},
+ {s:6,e:8,v:'V1: Inteligencia artificial',d:'D3-V1: Razonamiento lógico',items:[7,8,9]},
+ {s:9,e:11,v:'V1: Inteligencia artificial',d:'D4-V1: Resolución de problemas',items:[10,11,12]},
+ {s:12,e:14,v:'V1: Inteligencia artificial',d:'D5-V1: Interacción lingüística',items:[13,14,15]},
+ {s:15,e:17,v:'V1: Inteligencia artificial',d:'D6-V1: Trabajo creativo',items:[16,17,18]},
+ {s:18,e:20,v:'V2: Personalización del aprendizaje',d:'D1-V2: Perfil del estudiante',items:[1,2,3]},
+ {s:21,e:23,v:'V2: Personalización del aprendizaje',d:'D2-V2: Datos de entrada',items:[4,5,6]},
+ {s:24,e:26,v:'V2: Personalización del aprendizaje',d:'D3-V2: Modelo de contenidos',items:[7,8,9]},
+ {s:27,e:29,v:'V2: Personalización del aprendizaje',d:'D4-V2: Modelo instruccional',items:[10,11,12]},
+ {s:30,e:32,v:'V2: Personalización del aprendizaje',d:'D5-V2: Motor adaptativo',items:[13,14,15]},
+ {s:33,e:35,v:'V2: Personalización del aprendizaje',d:'D6-V2: Interfaz y controles de usuario',items:[16,17,18]},
+ {s:36,e:38,v:'V2: Personalización del aprendizaje',d:'D7-V2: Objetivos de personalización',items:[19,20,21]},
+ {s:39,e:41,v:'V2: Personalización del aprendizaje',d:'D8-V2: Evaluación y gobernanza',items:[22,23,24]}
 ];
 
 function regs(){try{return JSON.parse(localStorage.getItem(STORE)||'[]')}catch(e){return[]}}
@@ -175,95 +215,212 @@ function extraer(texto){
  }
  return out;
 }
-function contexto(idx){
- const i=Math.min(idx,41);
- const d=dims.find(x=>i>=x.s&&i<=x.e)||dims[dims.length-1];
- return {...d,item:d.base+(i-d.s)};
+function currentDimIndex(){
+ return Math.min(Math.floor(valores.length/3),13);
+}
+function currentDim(){
+ return dims[currentDimIndex()];
+}
+function committedInCurrentDim(){
+ return valores.length % 3;
 }
 function init(){
  render();renderTabla();
  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
- if(!SR){err('Este navegador no ofrece reconocimiento de voz compatible. Usa Google Chrome en una página HTTPS.');document.getElementById('micBtn').disabled=true;return}
- recognition=new SR(); recognition.lang='es-PE'; recognition.continuous=true; recognition.interimResults=false; recognition.maxAlternatives=1;
+ if(!SR){
+   err('Este navegador no ofrece reconocimiento de voz compatible. Usa Google Chrome en una página HTTPS.');
+   document.getElementById('micBtn').disabled=true;return;
+ }
+ recognition=new SR();
+ recognition.lang='es-PE';
+ recognition.continuous=true;
+ recognition.interimResults=true;
+ recognition.maxAlternatives=1;
 
  recognition.onresult=e=>{
+   let interimText='';
+   let finalNumbers=[];
+
    for(let i=e.resultIndex;i<e.results.length;i++){
-     if(!e.results[i].isFinal) continue;
      const txt=e.results[i][0].transcript;
-     document.getElementById('transcript').textContent='Escuché: “'+txt+'”';
-     const t=norm(txt);
-     if(/\b(atras|retrocede|retroceder|borra ultimo|borrar ultimo)\b/.test(t)){retroceder();continue}
-     const nums=extraer(txt);
-     nums.forEach(n=>agregarValor(n,false));
+     if(e.results[i].isFinal){
+       finalNumbers.push(...extraer(txt));
+       document.getElementById('transcript').textContent='Confirmado: “'+txt+'”';
+     }else{
+       interimText += ' ' + txt;
+     }
+   }
+
+   if(interimText.trim()){
+     preview=extraer(interimText);
+     render();
+     document.getElementById('transcript').textContent='Escuchando: “'+interimText.trim()+'”';
+   }
+
+   if(finalNumbers.length){
+     preview=[];
+     finalNumbers.forEach(n=>agregarValor(n,false));
      render();
    }
  };
+
  recognition.onerror=e=>{
-   if(e.error==='not-allowed'){err('Chrome no tiene permiso para usar el micrófono.');detenerMic()}
-   else if(!['no-speech','aborted'].includes(e.error))err('Micrófono: '+e.error);
+   if(e.error==='not-allowed'){
+     err('Chrome no tiene permiso para usar el micrófono.');
+     detenerMic();
+   }else if(!['no-speech','aborted'].includes(e.error)){
+     err('Micrófono: '+e.error);
+   }
  };
  recognition.onend=()=>{if(mic){try{recognition.start()}catch(e){}}};
 
  document.addEventListener('keydown',e=>{
    if(document.activeElement?.id==='codigo')return;
    if(['1','2','3','4','5'].includes(e.key))agregarValor(Number(e.key));
-   if(e.key==='Backspace'){e.preventDefault();retroceder()}
+   if(e.key==='Backspace'){e.preventDefault();retrocederUno()}
  });
 }
+
 function agregarValor(n,redraw=true){
  if(![1,2,3,4,5].includes(Number(n))||valores.length>=42)return;
+
+ const oldDim=currentDimIndex();
  valores.push(Number(n));
+
+ if(valores.length%3===0){
+   const d=dims[oldDim];
+   const trip=valores.slice(valores.length-3);
+   mostrarUltimaDimension(d,trip);
+ }
+
  if(redraw)render();
- if(valores.length===42){detenerMic();autoGuardar()}
+
+ if(valores.length===42){
+   detenerMic();
+   autoGuardar();
+ }
 }
-function retroceder(){if(valores.length){valores.pop();clearNotice();render()}}
+
+function mostrarUltimaDimension(d,trip){
+ document.getElementById('lastBox').style.display='flex';
+ document.getElementById('lastDim').textContent=d.d;
+ document.getElementById('lastVals').textContent=trip.join(' · ');
+}
+
+function retrocederUno(){
+ preview=[];
+ if(valores.length){valores.pop();clearNotice();render()}
+}
+function retrocederDimension(){
+ preview=[];
+ if(!valores.length)return;
+ const resto=valores.length%3;
+ const quitar=resto===0?3:resto;
+ valores.splice(valores.length-quitar,quitar);
+ clearNotice();render();
+}
 function toggleMic(){
  if(!recognition)return;
  if(mic){detenerMic();return}
  const c=document.getElementById('codigo').value.trim();
  if(!c){err('Primero escribe el código del participante.');return}
- mic=true;const b=document.getElementById('micBtn');b.textContent='⏹ Detener dictado';b.classList.add('mic-on');clearNotice();
+ mic=true;
+ const b=document.getElementById('micBtn');
+ b.textContent='⏹ Detener dictado';b.classList.add('mic-on');clearNotice();
  try{recognition.start()}catch(e){}
 }
 function detenerMic(){
- mic=false;const b=document.getElementById('micBtn');b.textContent='🎤 Iniciar dictado';b.classList.remove('mic-on');
+ mic=false;preview=[];
+ const b=document.getElementById('micBtn');
+ b.textContent='🎤 Iniciar dictado';b.classList.remove('mic-on');
  if(recognition){try{recognition.stop()}catch(e){}}
+ render();
 }
 function limpiarActual(){
- if(!valores.length)return;
+ if(!valores.length&&!preview.length)return;
  if(!confirm('¿Borrar todas las respuestas del participante actual?'))return;
- valores=[];clearNotice();render();
+ valores=[];preview=[];clearNotice();render();
 }
 function nuevoParticipante(){
- if(valores.length&&!confirm('Hay respuestas sin guardar. ¿Descartarlas?'))return;
- detenerMic();valores=[];document.getElementById('codigo').value='';clearNotice();render();document.getElementById('codigo').focus();
+ if((valores.length||preview.length)&&!confirm('Hay respuestas sin guardar. ¿Descartarlas?'))return;
+ detenerMic();valores=[];preview=[];
+ document.getElementById('codigo').value='';
+ document.getElementById('lastBox').style.display='none';
+ clearNotice();render();document.getElementById('codigo').focus();
 }
 function autoGuardar(){
  if(guardando)return;
  const codigo=document.getElementById('codigo').value.trim();
  if(!codigo){err('Falta el código del participante.');return}
  const r=regs();
- if(r.some(x=>String(x.codigo).toLowerCase()===codigo.toLowerCase())){err('El código '+codigo+' ya existe. No se guardó nuevamente.');return}
+ if(r.some(x=>String(x.codigo).toLowerCase()===codigo.toLowerCase())){
+   err('El código '+codigo+' ya existe. No se guardó nuevamente.');
+   return;
+ }
  guardando=true;
- r.push({fecha:new Date().toISOString(),codigo,vals:[...valores]});saveRegs(r);
+ r.push({fecha:new Date().toISOString(),codigo,vals:[...valores]});
+ saveRegs(r);
  ok('✓ '+codigo+' guardado automáticamente. Ingresa el siguiente código.');
- valores=[];guardando=false;document.getElementById('codigo').value='';render();setTimeout(()=>document.getElementById('codigo').focus(),120);
+ valores=[];preview=[];guardando=false;
+ document.getElementById('codigo').value='';
+ document.getElementById('lastBox').style.display='none';
+ render();setTimeout(()=>document.getElementById('codigo').focus(),120);
 }
+
 function render(){
- const c=contexto(valores.length);
- document.getElementById('varTxt').textContent=c.v;
- document.getElementById('dimTxt').textContent=c.d;
- document.getElementById('posTxt').textContent=Math.min(valores.length+1,42)+' / 42';
- document.getElementById('itemTxt').textContent=valores.length<42?'Ítem '+c.item:'Completado';
- document.getElementById('valorTxt').textContent=valores.length?valores[valores.length-1]:'—';
+ const di=currentDimIndex();
+ const d=dims[di];
+ const base=di*3;
+ const committed=committedInCurrentDim();
+
+ document.getElementById('varTxt').textContent=d.v;
+ document.getElementById('dimTxt').textContent=d.d;
+ document.getElementById('dimPosTxt').textContent=(di+1)+' / 14';
+
+ for(let j=0;j<3;j++){
+   const card=document.getElementById('card'+j);
+   const val=document.getElementById('val'+j);
+   document.getElementById('item'+j).textContent='Ítem '+d.items[j];
+
+   card.classList.remove('active','filled','preview');
+   val.classList.remove('preview');
+
+   const absolutePos=base+j;
+
+   if(absolutePos<valores.length){
+     val.textContent=valores[absolutePos];
+     card.classList.add('filled');
+   }else{
+     const previewIndex=j-committed;
+     if(previewIndex>=0 && previewIndex<preview.length && previewIndex<(3-committed)){
+       val.textContent=preview[previewIndex];
+       val.classList.add('preview');
+       card.classList.add('preview');
+     }else{
+       val.textContent='—';
+     }
+   }
+
+   if(j===committed && valores.length<42){
+     card.classList.add('active');
+   }
+ }
+
  document.getElementById('bar').style.width=(valores.length/42*100)+'%';
  document.getElementById('progressText').textContent=valores.length+' de 42 ítems';
- const chips=document.getElementById('chips');chips.innerHTML='';
+
+ const chips=document.getElementById('chips');
+ chips.innerHTML='';
  valores.forEach((v,i)=>{
-   const x=contexto(i),s=document.createElement('span');s.className='chip';
-   s.textContent=(x.v.startsWith('V1')?'V1':'V2')+'-I'+x.item+': '+v;chips.appendChild(s);
+   const x=dims[Math.floor(i/3)];
+   const localIndex=i-x.s;
+   const s=document.createElement('span');
+   s.className='chip';
+   s.textContent=(x.v.startsWith('V1')?'V1':'V2')+'-I'+x.items[localIndex]+': '+v;
+   chips.appendChild(s);
  });
 }
+
 function renderTabla(){
  const r=regs();document.getElementById('count').textContent=r.length;
  const tb=document.getElementById('tbody');tb.innerHTML='';
@@ -281,23 +438,31 @@ function eliminarUltimo(){
 function exportarExcel(){
  const r=regs();if(!r.length){err('Todavía no hay participantes guardados.');return}
  if(typeof XLSX==='undefined'){exportarCSV();return}
+
  const rows=[];
- const h1=['Fecha/Hora','Código del participante'];
- for(let i=1;i<=18;i++)h1.push('Ítem '+i);
- for(let i=1;i<=24;i++)h1.push('Ítem '+i);
- rows.push(h1);
+ const h=['Fecha/Hora','Código del participante'];
+ for(let i=1;i<=18;i++)h.push('Ítem '+i);
+ for(let i=1;i<=24;i++)h.push('Ítem '+i);
+ rows.push(h);
+
  r.forEach(x=>rows.push([new Date(x.fecha).toLocaleString(),x.codigo,...x.vals]));
+
  const ws=XLSX.utils.aoa_to_sheet(rows);
  ws['!cols']=[{wch:20},{wch:18},...Array(42).fill({wch:9})];
- const wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,ws,'Base limpia');
- XLSX.writeFile(wb,'Base_instrumento_fisico.xlsx');ok('Excel descargado.');
+
+ const wb=XLSX.utils.book_new();
+ XLSX.utils.book_append_sheet(wb,ws,'Base limpia');
+ XLSX.writeFile(wb,'Base_instrumento_fisico.xlsx');
+ ok('Excel descargado.');
 }
 function exportarCSV(){
- const r=regs();const h=['Fecha/Hora','Código',...Array.from({length:18},(_,i)=>'Ítem '+(i+1)),...Array.from({length:24},(_,i)=>'Ítem '+(i+1))];
+ const r=regs();
+ const h=['Fecha/Hora','Código',...Array.from({length:18},(_,i)=>'Ítem '+(i+1)),...Array.from({length:24},(_,i)=>'Ítem '+(i+1))];
  const lines=[h.map(x=>JSON.stringify(x)).join(',')];
  r.forEach(x=>lines.push([new Date(x.fecha).toLocaleString(),x.codigo,...x.vals].map(x=>JSON.stringify(x)).join(',')));
  const blob=new Blob(["\ufeff"+lines.join('\n')],{type:'text/csv;charset=utf-8'});
- const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='Base_instrumento_fisico.csv';a.click();URL.revokeObjectURL(a.href);
+ const a=document.createElement('a');
+ a.href=URL.createObjectURL(blob);a.download='Base_instrumento_fisico.csv';a.click();URL.revokeObjectURL(a.href);
 }
 function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 function ok(m){const n=document.getElementById('notice');n.className='notice ok';n.textContent=m}
